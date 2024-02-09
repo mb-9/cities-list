@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use Illuminate\Support\Facades\Config;
 use simplehtmldom\HtmlDocument;
 use simplehtmldom\HtmlNode;
@@ -9,19 +10,17 @@ use simplehtmldom\HtmlNode;
 
 class CityController extends Controller
 {
-    public function fetch() : bool {
 
-        $content = file_get_contents(Config::get('app.citiesWebpage'));
+    public function fetch(int $id){
+        $content = file_get_contents('https://www.e-obce.sk/obecedit.html?id='. $id);
         $content = iconv('windows-1250', 'utf-8', $content);
 
         $html = new HtmlDocument($content);
 
-        foreach($html->find('a[class=okreslink]') as $a) {
-            /** @var $a HtmlNode **/
-            var_dump($a->innerText());
-        }
+        $city = new City();
+        $city->fillAttributesFromAnEditPage($html);
 
-        return true;
+        var_dump($city);
     }
 
 }
