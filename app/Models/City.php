@@ -72,9 +72,13 @@ class City extends Model
         $this->email        = $html->find('input[name=Email]')[0]->value;
 
         $this->city_hall_street         = $html->find('input[name=Ulica]')[0]->value;
-        $this->city_hall_street_number  = $html->find('input[name=Ulica]')[0]->value;
+        $this->city_hall_street_number  = $html->find('input[name=Cislo]')[0]->value;
         $this->city_hall_zip            = $html->find('input[name=Psc]')[0]->value;
         $this->city_hall_post           = $html->find('input[name=Posta]')[0]->value;
+        $this->coat_of_arms_path        = "";
+        $this->latitude                 = 0;
+        $this->longitude                = 0;
+        $this->timezone                 = "";
 
         return true;
     }

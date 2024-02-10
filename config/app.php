@@ -191,7 +191,9 @@ return [
     |--------------------------------------------------------------------------
     |
     */
-    'citiesWebpage'      => 'https://www.e-obce.sk/kraj/NR.html'
+    'citiesWebpage'      => 'https://www.e-obce.sk/kraj/NR.html',
+    'cityEditPage'       => 'https://www.e-obce.sk/obecedit.html?'
+
 
 
 ];

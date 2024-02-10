@@ -17,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/cities/fetch/{id}', [\App\Http\Controllers\CityController::class, 'fetch']);
+Route::get('/cities/fetch/', [\App\Http\Controllers\CityController::class, 'fetch']);

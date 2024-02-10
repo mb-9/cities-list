@@ -3,24 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\CityScraper;
+use App\Models\ScraperHelper;
 use Illuminate\Support\Facades\Config;
-use simplehtmldom\HtmlDocument;
-use simplehtmldom\HtmlNode;
+use Illuminate\Support\Facades\Log;
 
 
 class CityController extends Controller
 {
 
-    public function fetch(int $id){
-        $content = file_get_contents('https://www.e-obce.sk/obecedit.html?id='. $id);
-        $content = iconv('windows-1250', 'utf-8', $content);
 
-        $html = new HtmlDocument($content);
 
-        $city = new City();
-        $city->fillAttributesFromAnEditPage($html);
+    public function fetch(){
 
-        var_dump($city);
+        set_time_limit(6000);
+        $ids = CityScraper::getAllCitiesIds(Config::get('app.citiesWebpage'));
+
+        foreach($ids as $name => $id){
+
+            $editPageUrl = Config::get('app.citiesWebpage').$id;
+
+            $html = ScraperHelper::getPageContent($editPageUrl);
+            $city = new City();
+            $city->name = $name;
+            $city->fillAttributesFromAnEditPage($html);
+
+            if(!$city->save()){
+                Log::error("Could not save the currency ".$city->name." to database");
+            }
+
+        }
+
     }
 
 }
