@@ -78,7 +78,6 @@ class City extends Model
         $this->coat_of_arms_path        = "";
         $this->latitude                 = 0;
         $this->longitude                = 0;
-        $this->timezone                 = "";
 
         return true;
     }
