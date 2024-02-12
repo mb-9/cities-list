@@ -12,32 +12,45 @@ class CityScraper
 
     /**
      *
-     * @param string $initialURL
+     * @param string $districtURL
      * @return array array in format ['cityName' => idOfCity]
      */
-    public static function getAllCitiesIds(string $initialURL): array
+    public static function getAllCitiesIds(string $districtURL): array
     {
 
         $arrCities = [];
 
-        $districts = self::getDistricts(ScraperHelper::getPageContent($initialURL));
+        $districtsContent = ScraperHelper::getPageContent($districtURL);
+        if (is_null($districtsContent))
+            return [];
+
+        $districts = self::getDistricts($districtsContent);
 
         foreach ($districts as $districtName => $districtUrl) {
 
-            $citiesDetailUrls = self::getCitiesFromDistrict(ScraperHelper::getPageContent($districtUrl));
+            $citiesContent = ScraperHelper::getPageContent($districtUrl);
+            if (is_null($citiesContent))
+                continue;
+
+            $citiesDetailUrls = self::getCitiesFromDistrict($citiesContent);
 
             foreach ($citiesDetailUrls as $cityName => $cityUrl) {
 
-                $cityEditLink = self::getCityEditUrl(ScraperHelper::getPageContent($cityUrl));
+                $detailPageContent = ScraperHelper::getPageContent($cityUrl);
+                if(is_null($detailPageContent))
+                    continue;
+
+                $cityEditLink = self::getCityEditUrl($detailPageContent);
 
                 $id = self::getCityIdFromEditUrl($cityEditLink);
 
-                $arrCities += [$cityName => $id];
+                if($id <> 0)
+                    $arrCities += [$cityName => $id];
 
             }
 
             $arrCities += $citiesDetailUrls;
-
+            break;
 
         }
 
@@ -69,9 +82,8 @@ class CityScraper
      */
     public static function getCitiesFromDistrict(HtmlDocument $html): array
     {
-        $es = $html->find('td[align=left][valign=top] a');
-
         $arrayCities = [];
+        $es = $html->find('td[align=left][valign=top] a');
         foreach ($es as $e) {
             /** @var $e HtmlNode * */
             $href = $e->href;
@@ -89,9 +101,12 @@ class CityScraper
      */
     public static function getCityEditUrl(HtmlDocument $html): string
     {
-        $aTag = $html->find('a[href^=https://www.e-obce.sk/obecedit]')[0]->href;
+        $aTag = $html->find('a[href^='.Config::get('app.cityEditPage').']');
 
-        return $aTag;
+        if(count($aTag) < 1)
+            return "";
+
+        return $aTag[0]->href;
     }
 
     /**
@@ -101,8 +116,13 @@ class CityScraper
     public static function getCityIdFromEditUrl(string $editUrl): int
     {
 
-        parse_str(parse_url($editUrl)['query'], $params);
-        return $params['id'];
+        $parsedUrl = parse_url($editUrl);
+        if($parsedUrl === false)
+            return 0;
+
+        parse_str($parsedUrl['query'], $params);
+
+        return $params['id'] ?? 0;
 
     }
 
