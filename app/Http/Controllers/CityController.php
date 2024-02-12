@@ -16,12 +16,11 @@ class CityController extends Controller
 
     public function fetch(){
 
-        set_time_limit(6000);
+        set_time_limit(10000);
         $ids = CityScraper::getAllCitiesIds(Config::get('app.citiesWebpage'));
-
         foreach($ids as $name => $id){
 
-            $editPageUrl = Config::get('app.citiesWebpage').$id;
+            $editPageUrl = Config::get('app.cityEditPage').'id='.$id;
 
             $html = ScraperHelper::getPageContent($editPageUrl);
             $city = new City();
@@ -32,7 +31,7 @@ class CityController extends Controller
                 Log::error("Could not save the currency ".$city->name." to database");
             }
 
-        }
+        }//endforeach
 
     }
 
