@@ -19,17 +19,18 @@
     @include('partials.styles')
 </head>
 <body>
+<div class="d-flex flex-column overflow-hidden min-vh-100 vh-100">
+    @include('partials.header')
+        <div id="app" class="flex-grow-1 overflow-auto">
 
-@include('partials.header')
-    <div id="app">
 
+            <main class="align-middle">
+                @yield('content')
+            </main>
+        </div>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
-
-@include('partials.footer')
-@include('partials.scripts')
+    @include('partials.footer')
+    @include('partials.scripts')
+</div>
 </body>
 </html>

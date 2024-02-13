@@ -1,13 +1,12 @@
 
 
-<div class="container">
 
-    <footer class="huge-top-margin coloured__background">
+    <footer class="container-fluid flex-grow-0 flex-shrink-1">
         <div class="container">
             <div class="footer-inner row">
                 <div class="footer__column col-sm-6 col-md-3 col-xs-12">
                     <div class="footer__section">
-                        <div class="footer__heading"> Kontakt </div>
+                        <div class="footer__heading"> Adresa a Kontakt </div>
                         <p>ŠÚKL</p>
                         <p>Kvetná 11</p>
                         <p>825 08 Bratislava 26</p>
@@ -202,5 +201,3 @@
 
         </div>
     </footer>
-
-</div>
