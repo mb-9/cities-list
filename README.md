@@ -25,6 +25,21 @@ Create database and set up connection string in .env, then run
 php artisan migrate
 ```
 
+Generate key
+--------
+
+```
+php artisan key:generate
+```
+
+NPM
+--------
+```
+npm install
+npm run dev
+```
+
+
 Running the parser
 --------
 
