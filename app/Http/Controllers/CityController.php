@@ -6,6 +6,7 @@ use App\Models\City;
 use App\Models\CityScraper;
 use App\Models\ScraperHelper;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 
@@ -14,9 +15,10 @@ class CityController extends Controller
 
 
 
-    public function fetch(){
+    public function fetch() : void{
 
-        set_time_limit(10000);
+        DB::table('cities')->truncate();
+        set_time_limit(1200);
         $ids = CityScraper::getAllCitiesIds(Config::get('app.citiesWebpage'));
         foreach($ids as $name => $id){
 

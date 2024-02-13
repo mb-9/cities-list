@@ -50,7 +50,6 @@ class CityScraper
             }
 
             $arrCities += $citiesDetailUrls;
-            break;
 
         }
 
