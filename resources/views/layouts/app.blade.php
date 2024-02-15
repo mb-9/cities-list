@@ -19,9 +19,9 @@
     @include('partials.styles')
 </head>
 <body>
-<div class="d-flex flex-column overflow-hidden min-vh-100 vh-100">
+
     @include('partials.header')
-        <div id="app" class="flex-grow-1 overflow-auto">
+        <div id="app" class="flex-grow-1">
 
 
             <main class="align-middle">
@@ -31,6 +31,6 @@
 
     @include('partials.footer')
     @include('partials.scripts')
-</div>
+
 </body>
 </html>
