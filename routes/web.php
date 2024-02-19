@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/cities/fetch/', [\App\Http\Controllers\CityController::class, 'fetch']);
+Route::get('/city/{id}', [ \App\Http\Controllers\CityController::class, 'view'])->name('city');

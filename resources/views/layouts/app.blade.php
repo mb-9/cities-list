@@ -21,7 +21,7 @@
 <body>
 
     @include('partials.header')
-        <div id="app" class="flex-grow-1">
+        <div id="" class="flex-grow-1">
 
 
             <main class="align-middle">
