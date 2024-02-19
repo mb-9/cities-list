@@ -168,6 +168,16 @@ footer {
 
 }
 
+.detail-box {
+    table  {
+        tr, td{
+            border-width: 0 ;
+            border-style: none;
+        }
+
+    }
+}
+
 .link-big {
     font-size: 35pt;
     text-decoration: none;

@@ -9,15 +9,13 @@
 
 
 
-    <div class="container p-5" style="text-align: center">
-        <h1 > Detail obce</h1>
+    <div class="container p-5 text-center">
+        <h1 class="fw-light"> Detail obce</h1>
         <div class="row justify-content-center mt-3 shadow detail-box">
 
-        <div class="col-sm-6" style="text-align:center">
+        <div class="col-sm-6 bg-light">
 
-
-
-                <table class="table mt-3" style="text-align:left">
+                <table class="table mt-3 text-start">
 
                    <tbody>
 
@@ -43,7 +41,7 @@
                        </tr>
                        <tr>
                            <td><b>Web:</b></td>
-                           <td> <a href="{{ $city->web_address  }}">{{ $city->web_address}}</a></td>
+                           <td>{{ $city->web_address}}</td>
                        </tr>
 
                    </tbody>
@@ -52,7 +50,7 @@
         </div>
 
             <div class="col-sm-6 align-items-center">
-                <div class="row align-items-center" style="height:100%" >
+                <div class="row align-items-center h-100 ">
                     <div>
 
                         <a href="{{ $city->web_address }}" class="link-big">{{ $city->name }}</a>
